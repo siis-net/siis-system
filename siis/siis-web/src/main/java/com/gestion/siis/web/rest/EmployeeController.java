@@ -20,7 +20,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gestion.siis.web.assemblers.EmployeeAssembler;
 import com.gestion.siis.web.resources.EmployeePersonalDataResource;
+import com.siis.nomina.dto.EmployeePersonalDataDto;
+import com.siis.nomina.service.EmployeeService;
 
 @Slf4j
 @Controller
@@ -29,7 +32,11 @@ import com.gestion.siis.web.resources.EmployeePersonalDataResource;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EmployeeController {
 	
-	private final @NonNull EntityLinks entityLinks;	
+	private final @NonNull EntityLinks entityLinks;
+	
+	private final @NonNull EmployeeService employeeService; 
+	
+	private final @NonNull EmployeeAssembler employeeAssembler;
 		
 	/**
 	 * Save personal data for the employee
@@ -37,13 +44,18 @@ public class EmployeeController {
 	 * @return
 	 */
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, method = POST)
-	public HttpEntity<String> save(@Valid @RequestBody EmployeePersonalDataResource employeePersonalDataResource) {
-		log.info("Saving personal data for '" + employeePersonalDataResource.getEmployeeId() + "' and name " + 
+	public HttpEntity<String> saveEmployeePersonalData(@Valid @RequestBody EmployeePersonalDataResource employeePersonalDataResource) {
+		log.info("Saving personal data for '" + employeePersonalDataResource.getEmployeeCode() + "' and name " + 
 					employeePersonalDataResource.getNames());
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		//httpHeaders.set(HttpHeaders.LOCATION, );
-		return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
+		EmployeePersonalDataDto employeePersonalDataDto = employeeService.savePersonalData(employeeAssembler.toDto(employeePersonalDataResource));
+		if (employeePersonalDataDto.getId() != null){
+			return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
+		}else{
+			return new ResponseEntity<>(httpHeaders, HttpStatus.METHOD_FAILURE);
+		}		
 	}
 }
 

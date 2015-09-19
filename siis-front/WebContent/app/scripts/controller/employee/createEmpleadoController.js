@@ -14,16 +14,13 @@ var createEmployeeController = function($scope, employeeService){
 
     personalDataJson = {
       "employeeId": $scope.codeEmployee,
-      "numberPlate": $scope.plateEmployee,
+      "numberPlaque": $scope.plateEmployee,
       "firstName": $scope.employeeFirstName,
       "secondName": $scope.employeeSecondName,
       "firstSurname": $scope.employeeFirstSurname,
       "secondSurname": $scope.employeeSecondSurname,
       "identificationNumber": $scope.employeeIdentificationNumber,
-      "typeDocument": $scope.employeeTypeDocument,
-      "expeditionDate": $scope.fecExpedition,
-      "expeditionCity": $scope.cityExpedition,
-      "expeditionCountry": $scope.countryExpedition
+      "typeDocument": $scope.employeeTypeDocument
     };
 
     employeeService.savePersonalData(personalDataJson)
