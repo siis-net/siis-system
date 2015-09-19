@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<property resource="logback.properties" />
+
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>.%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n
+			</Pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>TRACE</level>
+		</filter>
+	</appender>
+
+  	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${logfile.path}/siis.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+		    <FileNamePattern>${logfile.path}/archive/siis.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<maxHistory>30</maxHistory>			
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n</Pattern>
+		</encoder> 	    
+  	</appender>
+  	
+	<logger name="com.pairx.findanrx" additivity="false">
+	    <level value="DEBUG" />
+		<appender-ref ref="fileAppender"/>
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="fileAppender"/>
+		<appender-ref ref="consoleAppender" />
+	</root>
+</configuration>
