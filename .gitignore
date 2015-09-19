@@ -3,8 +3,12 @@
 */target/**
 siis/siis-web/target/**
 siis/siis-nomina/target/**
-*/bower_components/**
-*/node_modules/**
+siis-front/WebContent/bower_components/**
+siis-front/WebContent/coverage/**
+siis-front/WebContent/node_modules/**
+siis-front/WebContent/dist
+siis-front/WebContent/.tmp
+siis-front/WebContent/.sass-cache
 
 # mutex file
 *.T300[01]OPEN
