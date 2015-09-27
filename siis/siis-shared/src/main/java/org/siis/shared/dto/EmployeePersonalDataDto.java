@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.siis.nomina.dto;
+package org.siis.shared.dto;
 
 import java.io.Serializable;
 

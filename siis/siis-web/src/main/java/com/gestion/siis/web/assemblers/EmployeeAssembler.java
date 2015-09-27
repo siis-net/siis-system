@@ -1,12 +1,12 @@
 package com.gestion.siis.web.assemblers;
 
+import org.siis.shared.dto.EmployeePersonalDataDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
 import com.gestion.siis.web.resources.EmployeePersonalDataResource;
-import com.siis.nomina.dto.EmployeePersonalDataDto;
 
 /**
  * 

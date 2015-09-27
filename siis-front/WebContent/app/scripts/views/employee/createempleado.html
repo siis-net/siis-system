@@ -1,58 +1,81 @@
 <div ng-controller="createEmployeeController as createEmployeeCtrl">
-  <md-content class="md-padding">
-    <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab label="Datos Personales">
-        <md-content class="md-padding">
-            <div>
-                <md-content layout-padding layout="row" layout-sm="column">
-                      <md-input-container style="width:30%">
-                        <label>Codigo</label>
-                        <input required name="codeEmployee" ng-model="codeEmployee">
+  <form name="employeeForm">
+    <md-content class="md-padding">
+      <md-tabs md-dynamic-height>
+        <md-tab label="Datos Personales">
+          <md-content class="md-padding">
+              <div>
+                  <md-content layout-padding layout="row" layout-sm="column">
+                        <md-input-container style="width:30%">
+                          <label>Codigo</label>
+                          <input required name="codeEmployee" ng-model="codeEmployee">
+                        </md-input-container>
+                        <md-input-container style="width:30%">
+                          <label>Placa</label>
+                          <input required name="plateEmployee" ng-model="plateEmployee">
+                        </md-input-container>
+                  </md-content>
+                  <md-content layout-padding layout="row" layout-sm="column">
+                      <md-input-container style="width:40%">
+                        <label>Nombres</label>
+                        <input required name="employeeName" ng-model="employeeName">
                       </md-input-container>
-                      <md-input-container style="width:30%">
-                        <label>Placa</label>
-                        <input required name="plateEmployee" ng-model="plateEmployee">
+                      <md-input-container style="width:40%">
+                        <label>Apellidos</label>
+                        <input required name="employeeSurname" ng-model="employeeSurname">
                       </md-input-container>
-                </md-content>
-                <md-content layout-padding layout="row" layout-sm="column">
-                    <md-input-container style="width:40%">
-                      <label>Primer Nombre</label>
-                      <input required name="employeeFirstName" ng-model="employeeFirstName">
+                  </md-content>
+                  <label>Identificacion</label>
+                  <md-content layout-padding layout="row" layout-sm="column">
+                      <md-input-container style="margin-right: 10px;">
+                          <label>Tipo de Idenficacion</label>
+                          <md-select ng-model="identificationType">
+                              <md-option ng-repeat="typeIdentification in typeIdentifications" aria-label=""
+                                   value="{{typeIdentification}}">{{typeIdentification}}</md-option>
+                          </md-select>
+                      </md-input-container>
+                      <md-input-container style="width:40%">
+                        <label>Numero de Identificacion</label>
+                        <input required name="employeeIdentificationNumber" ng-model="employeeIdentificationNumber">
                     </md-input-container>
-                    <md-input-container style="width:40%">
-                      <label>Segundo Nombre</label>
-                      <input required name="employeeSecondName" ng-model="employeeSecondName">
-                    </md-input-container>
-                    <md-input-container style="width:25%">
-                      <label>Primer Apellido</label>
-                      <input required name="employeeFirstSurname" ng-model="employeeFirstSurname">
-                    </md-input-container>
-                    <md-input-container style="width:25%">
-                      <label>Segundo Apellido</label>
-                      <input required name="employeeSecondSurname" ng-model="employeeSecondSurname">
-                    </md-input-container>
-                </md-content>
-                <md-content layout-padding layout="row" layout-sm="column">
-                    <md-input-container style="width:40%">
-                      <label>Numero de Identificacion</label>
-                      <input required name="employeeIdentificationNumber" ng-model="employeeIdentificationNumber">
-                    </md-input-container>
-                    <md-input-container style="width:40%">
-                      <label>Tipo de Documento</label>
-                      <input required name="employeeTypeDocument" ng-model="employeeTypeDocument">
-                    </md-input-container>
-                </md-content>
-                <md-button class="md-raised" ng-click="savePersonalData()">Guardar</md-button>
-              </div>
-            </div>
-        </md-content>
-      </md-tab>
-      <md-tab label="Datos Laborales">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Tab Two</h1>
-            Tab 2
-        </md-content>
-      </md-tab>
-    </md-tabs>
-  </md-content>
+                    <md-datepicker ng-model="documentExpeditionDate" placeholder="Fecha de Expedicion"
+                                   md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+                  </md-content>
+                  <md-content layout-padding layout="row" layout-sm="column">
+                      <md-autocomplete flex required
+                                       md-input-name="autocompleteCity"
+                                       md-input-minlength="2"
+                                       md-input-maxlength="18"
+                                       md-no-cache="noCache"
+                                       md-selected-item="selectedCity"
+                                       md-search-text="searchCity"
+                                       md-items="city in querySearch(searchCity)"
+                                       md-item-text="city.display"
+                                       md-floating-label="Escoja una ciudad">
+                        <md-item-template>
+                          <span md-highlight-text="searchText">{{item.display}}</span>
+                        </md-item-template>
+                      </md-autocomplete>
+                      <md-input-container style="width:40%">
+                          <label>Departamento</label>
+                          <label>{{expeditionDepto}}</label>
+                      </md-input-container>
+                      <md-input-container style="width:40%">
+                          <label>Pais</label>
+                          <label>{{expeditionCountry}}</label>
+                      </md-input-container>
+                  </md-content>
+                  <md-button class="md-raised" ng-click="savePersonalData()">Guardar</md-button>
+                </div>
+          </md-content>
+        </md-tab>
+        <md-tab label="Datos Laborales">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Tab Two</h1>
+              Tab 2
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+  </form>
 </div>

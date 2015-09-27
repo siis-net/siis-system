@@ -3,7 +3,7 @@
  */
 package com.siis.nomina.service;
 
-import com.siis.nomina.dto.EmployeePersonalDataDto;
+import org.siis.shared.dto.EmployeePersonalDataDto;
 
 /**
  * @author admin

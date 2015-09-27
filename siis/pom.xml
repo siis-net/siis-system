@@ -269,10 +269,18 @@
 			<artifactId>spring-plugin-core</artifactId>
 			<version>1.2.0.RELEASE</version>
 		</dependency>  
+		
+		<!-- mapping framework -->
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.5.1</version>
+		</dependency>
   </dependencies>
   
   <modules>
     <module>siis-web</module>
     <module>siis-nomina</module>
+    <module>siis-shared</module>
   </modules>
 </project>

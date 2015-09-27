@@ -1,0 +1,1 @@
+INSERT INTO COUNTRY(ID,NAME) VALUES(nextval('country_seq'),'COLOMBIA');

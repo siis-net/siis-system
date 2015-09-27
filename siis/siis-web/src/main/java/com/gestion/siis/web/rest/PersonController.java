@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.siis.shared.dto.EmployeePersonalDataDto;
+import org.siis.shared.dto.PersonDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.http.HttpEntity;
@@ -21,37 +22,38 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gestion.siis.web.assemblers.EmployeeAssembler;
+import com.gestion.siis.web.assemblers.PersonAssembler;
 import com.gestion.siis.web.resources.EmployeePersonalDataResource;
-import com.siis.nomina.service.EmployeeService;
+import com.gestion.siis.web.resources.PersonResource;
+import com.siis.nomina.facades.PersonFacade;
 
 @Slf4j
 @Controller
-@RequestMapping(value = "/employee", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/person", produces = APPLICATION_JSON_VALUE)
 //@ExposesResourceFor(???????)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class EmployeeController {
+public class PersonController {
 	
 	private final @NonNull EntityLinks entityLinks;
 	
-	private final @NonNull EmployeeService employeeService; 
+	private final @NonNull PersonFacade personFacade; 
 	
-	private final @NonNull EmployeeAssembler employeeAssembler;
+	private final @NonNull PersonAssembler personAssembler;
 		
 	/**
-	 * Save personal data for the employee
+	 * Save person
 	 * @param riskResource
 	 * @return
 	 */
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, method = POST)
-	public HttpEntity<String> saveEmployeePersonalData(@Valid @RequestBody EmployeePersonalDataResource employeePersonalDataResource) {
-		log.info("Saving personal data for '" + employeePersonalDataResource.getEmployeeCode() + "' and name " + 
-					employeePersonalDataResource.getNames());
+	public HttpEntity<String> savePerson(@Valid @RequestBody PersonResource personResource) {
+		log.info("Saving person for '" + personResource.getName() + "' and surname " + 
+				personResource.getSurname());
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		//httpHeaders.set(HttpHeaders.LOCATION, );
-		EmployeePersonalDataDto employeePersonalDataDto = employeeService.savePersonalData(employeeAssembler.toDto(employeePersonalDataResource));
-		if (employeePersonalDataDto.getId() != null){
+		PersonDto personDto = personFacade.savePerson(personAssembler.toPersonDto(personResource));
+		if (personDto.getId() != null){
 			return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
 		}else{
 			return new ResponseEntity<>(httpHeaders, HttpStatus.METHOD_FAILURE);

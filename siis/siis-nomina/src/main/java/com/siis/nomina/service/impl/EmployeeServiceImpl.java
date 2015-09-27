@@ -8,10 +8,10 @@ import javax.transaction.Transactional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import org.siis.shared.dto.EmployeePersonalDataDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.siis.nomina.dto.EmployeePersonalDataDto;
 import com.siis.nomina.entity.Employee;
 import com.siis.nomina.repository.EmployeeRespository;
 import com.siis.nomina.service.EmployeeService;
@@ -26,7 +26,7 @@ import com.siis.nomina.service.EmployeeService;
 public class EmployeeServiceImpl implements EmployeeService{
 	
 	/**
-	 * {@link RiskRepository}
+	 * {@link EmployeeRespository}
 	 */
 	private @NonNull EmployeeRespository employeeRespository;
 
