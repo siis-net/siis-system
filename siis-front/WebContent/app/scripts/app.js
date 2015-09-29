@@ -6,6 +6,8 @@ angular.module('siisApp.service', []);
 
 angular.module('siisApp.directives', []);
 
+angular.module('siisApp.utils', []);
+
 /**
  * @ngdoc overview
  * @name siisApp

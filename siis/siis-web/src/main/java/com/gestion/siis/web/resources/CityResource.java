@@ -21,6 +21,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Relation(collectionRelation = "personalData")
 public class CityResource extends ResourceSupport {
 
-	private String cityCode;
+	private Long cityCode;
 	private String cityName;
 }

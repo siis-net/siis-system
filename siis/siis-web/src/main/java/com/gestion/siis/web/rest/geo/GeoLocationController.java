@@ -47,8 +47,8 @@ public class GeoLocationController {
 	 * @param 
 	 * @return
 	 */
-	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, method = GET)
-	public ResponseEntity<List<CityResource>> getAllCities() {
+	@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = GET)
+	public HttpEntity<List<CityResource>> getAllCities() {
 		log.info("Getting all Cities ");
 		List<City> listCities = cityFacade.findCities();		
 		if (listCities != null && listCities.size() > 0){
@@ -63,7 +63,7 @@ public class GeoLocationController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}", method = GET)
+	@RequestMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = GET)
 	public HttpEntity<CityResource> findById(@PathVariable Long id) {
 		log.info("Searching Risk with Id '" + id + "'");
 		City city = cityFacade.findCity(id);

@@ -27,7 +27,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = false)
-@Table(name="citiy", indexes = { @Index(columnList = "id")})
+@Table(name="city", indexes = { @Index(columnList = "id")})
 public class City {
 
 	@Id	

@@ -29,7 +29,9 @@ public class CityAssembler implements ResourceAssembler<City, CityResource>{
 
 	@Override
 	public CityResource toResource(City entity) {
-		return mapper.map(entity, CityResource.class);
+		CityResource cityResource = mapper.map(entity, CityResource.class);
+		cityResource.add(linkTo(methodOn(GeoLocationController.class).findById(entity.getId())).withSelfRel());
+		return cityResource;
 	}
 	
 	public List<CityResource> toResourceList(List<City> entity) {
@@ -40,7 +42,7 @@ public class CityAssembler implements ResourceAssembler<City, CityResource>{
 			cityResource.add(linkTo(methodOn(GeoLocationController.class).findById(city.getId())).withSelfRel());
 			listResources.add(cityResource);
 		}
-		return null;
+		return listResources;
 	}
 
 }
