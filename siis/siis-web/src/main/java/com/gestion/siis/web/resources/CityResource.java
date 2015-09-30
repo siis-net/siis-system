@@ -23,4 +23,6 @@ public class CityResource extends ResourceSupport {
 
 	private Long cityCode;
 	private String cityName;
+	private String stateName;
+	private String countryName;
 }

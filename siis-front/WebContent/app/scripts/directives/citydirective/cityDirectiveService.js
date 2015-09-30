@@ -2,22 +2,22 @@
 
 var directives = angular.module('siisApp.directives');
 
-directives.directive('cityDirective', ['geolocationService', 'utilService', function () {
+directives.directive('cityDirective', ['geoLocationService', function (geoLocationService) {
     return {
       restrict: 'A',
       scope: {
         cityList: '=cityList'
       },
       link: function postLink(scope, element, attrs) {
-          var cityList = geolocationService.getAllCities();
+          var cityList = geoLocationService.getAllCities();
           cityList.then(function (response){
                 if (response !== undefined){
                     scope.cityList = response;
                 }else{
-                    utilService.showAlert('An error was found lookign for risk details.');
+                    //utilService.showAlert('An error was found lookign for risk details.');
                 }
             }, function(err){
-                    utilService.showAlert('An error was found lookign for risk details.' + err);
+                    //utilService.showAlert('An error was found lookign for risk details.' + err);
             });
         }
     };

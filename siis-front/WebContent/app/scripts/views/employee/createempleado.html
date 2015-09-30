@@ -41,8 +41,9 @@
                     <md-datepicker ng-model="documentExpeditionDate" placeholder="Fecha de Expedicion"
                                    md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
                   </md-content>
+                  <city-directive></city-directive>
                   <md-content layout-padding layout="row" layout-sm="column">
-                      <md-autocomplete flex required
+                      <md-autocomplete flex required style="width:30%"
                                        md-input-name="autocompleteCity"
                                        md-input-minlength="2"
                                        md-input-maxlength="18"
@@ -56,14 +57,7 @@
                           <span md-highlight-text="searchText">{{item.display}}</span>
                         </md-item-template>
                       </md-autocomplete>
-                      <md-input-container style="width:40%">
-                          <label>Departamento</label>
-                          <label>{{expeditionDepto}}</label>
-                      </md-input-container>
-                      <md-input-container style="width:40%">
-                          <label>Pais</label>
-                          <label>{{expeditionCountry}}</label>
-                      </md-input-container>
+                      <state-Directive cityid="1"></state-Directive>
                   </md-content>
                   <md-button class="md-raised" ng-click="savePersonalData()">Guardar</md-button>
                 </div>

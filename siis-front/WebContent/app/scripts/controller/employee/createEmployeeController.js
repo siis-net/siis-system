@@ -5,10 +5,12 @@
 var createEmployeeController = function($scope, employeeService, geoLocationService){
   'use strict';
 
-  $scope.cities        = loadAllCities();
-  $scope.selectedCity  = null;
-  $scope.searchCity    = null;
-  $scope.querySearch   = querySearch;
+  getAllCitiesFromBackend();
+  $scope.citiesMap = new Map();
+  $scope.cities = '';
+  $scope.selectedCity = null;
+  $scope.searchCity = null;
+  $scope.querySearch = querySearch;
 
   $scope.typeIdentifications = [
     "CC",
@@ -54,10 +56,8 @@ var createEmployeeController = function($scope, employeeService, geoLocationServ
 
   }
 
-  $scope.findStateAndCountry = function(){
-
-    window.alert($scope.selectedCity);
-
+  $scope.findCityCode = function(){
+    console.log('Hello');
   }
 
 
@@ -66,9 +66,7 @@ var createEmployeeController = function($scope, employeeService, geoLocationServ
     return results;
   }
 
-
-  function loadAllCities() {
-    var allCities = 'Medellin, Bogota, Cali, Buenaventura';
+  function loadAllCities(allCities) {
     return allCities.split(/, +/g).map( function (city) {
       return {
         value: city.toLowerCase(),
@@ -84,6 +82,22 @@ var createEmployeeController = function($scope, employeeService, geoLocationServ
     return function filterFn(city) {
       return (city.value.indexOf(lowercaseQuery) === 0);
     };
+  }
+
+  function getAllCitiesFromBackend(){
+    var allCities = '';
+    var cities = geoLocationService.getAllCities();
+    cities.then(
+      function(response){
+        var cityList = response;
+        for (var i = 0; i < cityList.length; i++) {
+          allCities = allCities+cityList[i].cityName+', ';
+          $scope.citiesMap.put(cityList[i].cityName, cityList[i].cityCode);
+        }
+        $scope.cities = loadAllCities(allCities);
+      }, function(err){
+        utilService.showAlert("An error was found getting the Sectors");
+      })
   }
 }
 

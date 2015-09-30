@@ -30,6 +30,8 @@ public class CityAssembler implements ResourceAssembler<City, CityResource>{
 	@Override
 	public CityResource toResource(City entity) {
 		CityResource cityResource = mapper.map(entity, CityResource.class);
+		cityResource.setStateName(entity.getState().getName());
+		cityResource.setCountryName(entity.getState().getCountry().getName());
 		cityResource.add(linkTo(methodOn(GeoLocationController.class).findById(entity.getId())).withSelfRel());
 		return cityResource;
 	}
